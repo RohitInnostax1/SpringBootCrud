@@ -15,17 +15,17 @@ public class Course {
     private String title;
     private String description;
 
-    // ✅ Default Constructor (Required for JPA)
+    
     public Course() {}
 
-    // ✅ Parameterized Constructor
+
     public Course(Long id, String title, String description) {
         this.id = id;
         this.title = title;
         this.description = description;
     }
 
-    // ✅ Getters and Setters
+   
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 

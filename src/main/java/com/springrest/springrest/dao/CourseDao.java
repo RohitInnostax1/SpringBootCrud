@@ -9,4 +9,3 @@ import com.springrest.springrest.entities.Course;
 public interface CourseDao extends JpaRepository<Course, Long> {
     
 }
- 

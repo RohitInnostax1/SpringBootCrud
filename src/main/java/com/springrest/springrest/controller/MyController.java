@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PutMapping;
 
+import com.springrest.springrest.entities.CourseResponse;
+
 
 
 
@@ -43,11 +45,11 @@ public class MyController {
     
     //get the courses
     @GetMapping("/courses")
-    public ResponseEntity<List<Course>> getCourses() {
+    public ResponseEntity<List<CourseResponse>> getCourses() {
         try {
-            List<Course> courses = this.courseservice.getCourses();
+            List<CourseResponse> courses = this.courseservice.getCourses();
             
-            if (courses.isEmpty()) {
+            if (courses.isEmpty()) { 
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT); 
             }
             
@@ -86,7 +88,7 @@ public class MyController {
     }
    
     
-    // //delete the course
+     //delete the course
     @DeleteMapping("/courses/{courseId}")
 public ResponseEntity<HttpStatus> deleteCourse(@PathVariable String courseId) {
     try {
@@ -95,6 +97,8 @@ public ResponseEntity<HttpStatus> deleteCourse(@PathVariable String courseId) {
     } catch (Exception e) {
        return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
+
+    
 }
     
 }   

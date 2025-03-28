@@ -1,5 +1,6 @@
 package com.springrest.springrest.services;
 
+import java.util.ArrayList;
 // import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.springrest.springrest.dao.CourseDao;
 import com.springrest.springrest.entities.Course;
+import com.springrest.springrest.entities.CourseResponse;
 
 @Service
 public class CourseServiceImplement implements CourseService {
@@ -26,8 +28,17 @@ public class CourseServiceImplement implements CourseService {
     // }
 
     @Override
-    public List<Course> getCourses() {
-        return courseDao.findAll();
+    public List<CourseResponse> getCourses() {
+        List<CourseResponse> courseResponse=new ArrayList<>();
+        List<Course> courses=courseDao.findAll();
+        for(Course course:courses)
+        {
+            CourseResponse response=new CourseResponse();
+            response.setId(course.getId());
+            response.setTitle(course.getTitle());
+            courseResponse.add(response);
+        }
+        return courseResponse;
     }
 
     @Override
@@ -53,3 +64,4 @@ public class CourseServiceImplement implements CourseService {
         entity.ifPresent(courseDao::delete);
     }
 }
+
