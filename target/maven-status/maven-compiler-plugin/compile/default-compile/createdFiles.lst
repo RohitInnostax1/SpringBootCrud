@@ -1,4 +1,7 @@
 com\springrest\springrest\entities\Course.class
+com\springrest\springrest\entities\CourseResponse.class
+com\springrest\springrest\SpringrestApplication.class
+com\springrest\springrest\entities\CourseTimeDuration.class
 com\springrest\springrest\services\CourseService.class
 com\springrest\springrest\services\CourseServiceImplement.class
 com\springrest\springrest\controller\MyController.class
