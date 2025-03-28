@@ -1,77 +1,55 @@
 package com.springrest.springrest.services;
 
-import java.util.ArrayList;
+// import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.springrest.springrest.dao.CourseDao;
 import com.springrest.springrest.entities.Course;
 
 @Service
 public class CourseServiceImplement implements CourseService {
-    private List<Course> list;
 
-    public CourseServiceImplement() {
-        list = new ArrayList<>();
-        list.add(new Course(145, "Javaa Course", "This course covers core concept of Java."));
-        list.add(new Course(2222, "Web Dev", "This course covers MERN Stack Topics."));
-    }
+    @Autowired
+    private CourseDao courseDao;
+
+    // private List<Course> list;
+
+    
+    // public CourseServiceImplement() {
+    //     // list = new ArrayList<>();
+    //     // list.add(new Course(145L, "Java Course", "This course covers core concept of Java."));
+    //     // list.add(new Course(2222L, "Web Dev", "This course covers MERN Stack Topics."));
+    // }
 
     @Override
     public List<Course> getCourses() {
-        return list;
+        return courseDao.findAll();
     }
 
     @Override
-    public Course getCourse(long courseId)
-    {
-        Course c=null;
-        for(Course course:list){
-            if(course.getId()==courseId)
-            {
-                c=course;
-                break;
-            }
-        }
-        return c;
+    public Course getCourse(long courseId) {
+      
+        return courseDao.findById(courseId).orElse(null);
     }
 
     @Override
-    public Course addCourse(Course course)
-    {
-        list.add(course);
-        return course;
+    public Course addCourse(Course course) {
+        return courseDao.save(course);
     }
 
     @Override
-    public Course updateCourse(Course course)
-    {
-     list.forEach(e->{
-        if(e.getId()==course.getId()){
-            e.setTitle(course.getTitle());
-            e.setDescription(course.getDescription());
-        }
-     });
-     return course;
+    public Course updateCourse(Course course) {
+        return courseDao.save(course);
     }
 
     @Override
-    public Course deleteCourse(long courseId) {
-        Course deletedCourse = null;
-        
-        for (Course course : list) {
-            if (course.getId() == courseId) {
-                deletedCourse = course;
-                break;
-            }
-        }
-        
-        if (deletedCourse != null) {
-            list = list.stream().filter(e -> e.getId() != courseId).collect(Collectors.toList());
-        }
-    
-        return deletedCourse; 
+    public void deleteCourse(long courseId) {
+       
+        Optional<Course> entity = courseDao.findById(courseId);
+        entity.ifPresent(courseDao::delete);
     }
-    
 }

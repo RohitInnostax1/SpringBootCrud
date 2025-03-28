@@ -1,40 +1,39 @@
 package com.springrest.springrest.entities;
 
+import jakarta.persistence.Entity;
+// import jakarta.persistence.GeneratedValue;
+// import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
+@Entity
 public class Course {
-    private long id;
-    private String title; 
+    
+    @Id
+    // @GeneratedValue(strategy = GenerationType.IDENTITY) // Auto-increment ID
+    private Long id;
+    
+    private String title;
     private String description;
 
-    public Course(long id, String title, String description) {
-        super();
+    // ✅ Default Constructor (Required for JPA)
+    public Course() {}
+
+    // ✅ Parameterized Constructor
+    public Course(Long id, String title, String description) {
         this.id = id;
         this.title = title;
         this.description = description;
     }
 
-    public void setDescription(String description) { // Fixed typo
-        this.description = description;
-    }
+    // ✅ Getters and Setters
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
+    public String getTitle() { return title; }
+    public void setTitle(String title) { this.title = title; }
 
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public long getId() {  
-        return id;
-    }
+    public String getDescription() { return description; }
+    public void setDescription(String description) { this.description = description; }
 
     @Override
     public String toString() {
